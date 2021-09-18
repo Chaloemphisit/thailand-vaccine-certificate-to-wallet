@@ -1,0 +1,41 @@
+## Use a Docker image with "docker-compose" installed on top of it.
+image: tmaier/docker-compose:latest
+services:
+  - docker:dind
+
+variables:
+  DOCKER_CONTAINER_NAME: ${CI_PROJECT_NAME}
+  DOCKER_IMAGE_TAG: ${DOCKER_LOGIN_USERNAME}/${CI_PROJECT_NAME}:latest
+
+before_script:
+  ## Install ssh agent (so we can access the Digital Ocean Droplet) and run it.
+  - apk update && apk add openssh-client
+  - eval $(ssh-agent -s)
+
+  ## Write the environment variable value to the agent store, create the ssh directory and give the right permissions to it.
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+
+  ## Make sure that ssh will trust the new host, instead of asking
+  - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  script:
+    ## Login this machine into Docker registry, creates a production build and push it to the registry.
+    # - docker login -u ${DOCKER_LOGIN_USERNAME} -p ${SECRETS_DOCKER_LOGIN_PASSWORD} registry.gitlab.com
+    - echo "$SECRETS_DOCKER_LOGIN_PASSWORD" | docker login --username ${DOCKER_LOGIN_USERNAME} --password-stdin
+    - docker build -t ${DOCKER_IMAGE_TAG} .
+    - docker push ${DOCKER_IMAGE_TAG}
+
+   # ssh -t digital-ocean-server "docker cmd1; docker cmd2;
+    - ssh -T ${SSH_USERNAME}@${SSH_HOST} "docker ps -q --filter \"name=${DOCKER_CONTAINER_NAME}\" | grep -q . && docker stop ${DOCKER_CONTAINER_NAME} && docker rm -fv ${DOCKER_CONTAINER_NAME} && docker rmi -f ${DOCKER_IMAGE_TAG}; docker run -d -p 3000:3000 --name ${DOCKER_CONTAINER_NAME} ${DOCKER_IMAGE_TAG}"
+
+    # Everything works, exit.
+    - exit 0
+  only:
+    - main
