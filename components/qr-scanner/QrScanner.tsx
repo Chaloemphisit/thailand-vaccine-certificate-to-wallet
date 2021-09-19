@@ -86,9 +86,16 @@ const QrScanner: FC<QrScannerProps> = ({ active, onSuccessfulScan }) => {
     <div className={`scanner ${active ? '' : 'scanner--hidden'}`}>
       <div className="scanner__aspect-ratio-container">
         <canvas ref={canvas} className="scanner__canvas" />
-        <video ref={video} playsInline className="scanner__video" controls={false} onCanPlay={handleCanPlay}>
-          <track kind="captions" />
-        </video>
+        <video
+          ref={video}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="scanner__video"
+          controls={false}
+          onCanPlay={handleCanPlay}
+        />
         <ScannerBorders />
       </div>
 
