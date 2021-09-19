@@ -73,7 +73,6 @@ const QrScanner: FC<QrScannerProps> = ({ active, onSuccessfulScan }) => {
     }
 
     video.current.srcObject = stream;
-    video.current.playsInline = true;
     video.current.play().catch(console.error);
   }, [status, stream]);
 
