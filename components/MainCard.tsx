@@ -1,7 +1,6 @@
-import React, { FC, memo } from 'react';
+import React, { FC, memo, useEffect, useState } from 'react';
 import { styled } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-import QrScan from './QrScan';
+import QrScanner from './qr-scanner/QrScanner';
 
 const PREFIX = 'MainCard';
 const classes = {
@@ -31,10 +30,15 @@ const Root = styled('div')(({ theme }) => ({
   },
 }));
 
-const MainCard: FC = (props) => (
-  <Root className={classes.root}>
-    <QrScan />
-  </Root>
-);
+const MainCard: FC = (props) => {
+  const [result, setResult] = useState<string | null>(null);
+
+  return (
+    <Root className={classes.root}>
+      <QrScanner active={result === null} onSuccessfulScan={(qrCodeData) => setResult(qrCodeData)} />
+      {result}
+    </Root>
+  );
+};
 
 export default memo(MainCard);

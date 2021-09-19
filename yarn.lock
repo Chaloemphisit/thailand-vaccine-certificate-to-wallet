@@ -750,6 +750,11 @@
     "@types/react" "*"
     csstype "^3.0.2"
 
+"@types/webrtc@^0.0.30":
+  version "0.0.30"
+  resolved "https://registry.yarnpkg.com/@types/webrtc/-/webrtc-0.0.30.tgz#5631d10ef5870f22344d1949bf8e5e63e44ba695"
+  integrity sha512-6RtNrygZrRP8dPMzYejjfRQHiNOGqb6T9dbXaDXorm9opA2N8t6VfFKtHPoJUHErjsSBX/XhDDEf+r+ptmLZJw==
+
 "@typescript-eslint/eslint-plugin@^4.28.1":
   version "4.28.1"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-4.28.1.tgz#c045e440196ae45464e08e20c38aff5c3a825947"
@@ -2770,6 +2775,11 @@ html-tokenize@^2.0.0:
     readable-stream "~1.0.27-1"
     through2 "~0.4.1"
 
+html5-qrcode@^2.0.12:
+  version "2.0.12"
+  resolved "https://registry.yarnpkg.com/html5-qrcode/-/html5-qrcode-2.0.12.tgz#8c93e530000625b0866e585e86e96fafe259a9ce"
+  integrity sha512-9pfGODZRZ2uhNiZJHGxKp7G31ORJ/N8kQmnib93/HucetbShBimARYjE3Mvgh+rDs2nTetUC5twUYuZ8kvZOvQ==
+
 http-cache-semantics@^4.0.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/http-cache-semantics/-/http-cache-semantics-4.1.0.tgz#49e91c5cbf36c9b94bcfcd71c23d5249ec74e390"
@@ -3196,7 +3206,7 @@ jsonfile@^4.0.0:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
-jsqr@^1.2.0:
+jsqr@^1.2.0, jsqr@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/jsqr/-/jsqr-1.4.0.tgz#8efb8d0a7cc6863cb6d95116b9069123ce9eb2d1"
   integrity sha512-dxLob7q65Xg2DvstYkRpkYtmKm2sPJ9oFhrhmudT1dZvNFFTlroai3AWSpLey/w5vMcLBXRgOJsbXpdN9HzU/A==

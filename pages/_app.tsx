@@ -8,6 +8,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from 'styled-components';
 import Layout from 'components/Layout';
 import theme from '../styles/theme';
+import '../styles/ScannerBorders.css';
+import '../styles/QrScanner.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
